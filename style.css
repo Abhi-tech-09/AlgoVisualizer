@@ -1,0 +1,97 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	display: grid;
+	grid-template-columns: 2fr 3fr;
+	overflow: hidden;
+}
+
+.tools-wrapper {
+	
+	width: 200px;
+
+	background-image: linear-gradient(to bottom right, #7c8288, #1a2027);
+}
+
+#start {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	width: 160px;
+}
+
+#distance {
+	position: absolute;
+	top: 70px;
+	left: 10px;
+	line-height: 1.9em;
+}
+
+.displayDistance {
+	line-height: 0.1em;
+	width: 110px;
+	position: absolute;
+	top: 70px;
+	left: 80px;
+}
+
+.points {
+	position: absolute;
+	top: 110px;
+	left: 10px;
+}
+
+#interactiveText {
+	font-size: 15px;
+	position: absolute;
+	left: 2px;
+	top: 120px;
+}
+
+#interactive {
+	position: absolute;
+	top: 127.4px;
+	left: 150px;
+}
+
+#defaultText {
+	font-size: 15px;
+	position: absolute;
+	top: 160px;
+}
+
+#defaultSize {
+	position: absolute;
+	top: 159.7px;
+	width: 45px;
+	left: 122px;
+	line-height: 2px;
+}
+.Algo {
+	position: absolute;
+	top: 200px;
+	left: 40px;
+}
+.speed {
+	position: absolute;
+	top: 310px;
+	left: 50px;
+}
+
+.adjacencylist{
+	position: absolute;
+    top: 400px;
+    left: 30px;
+}
+#inputEdge{
+	width: 97.8px;
+    position: absolute;
+    top: 50px;
+}
+canvas {
+	display: block;
+}
