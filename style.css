@@ -44,53 +44,68 @@ body {
 	top: 110px;
 	left: 10px;
 }
+.plotting{
+	position: absolute;
+    top: 110px;
+    width: 200px;
+    /* background-color: red; */
+    left: 30px;
+    padding: 2px;
+}
 
 #interactiveText {
 	font-size: 15px;
 	position: absolute;
 	left: 2px;
-	top: 120px;
+	top: 150px;
 }
 
 #interactive {
 	position: absolute;
-	top: 127.4px;
+	top: 160px;
 	left: 150px;
 }
 
 #defaultText {
 	font-size: 15px;
 	position: absolute;
-	top: 160px;
+	top: 190px;
 }
 
 #defaultSize {
 	position: absolute;
-	top: 159.7px;
+	top: 190px;
 	width: 45px;
 	left: 122px;
 	line-height: 2px;
 }
 .Algo {
 	position: absolute;
-	top: 200px;
+	top: 240px;
 	left: 40px;
 }
 .speed {
 	position: absolute;
-	top: 310px;
+	top: 350px;
 	left: 50px;
 }
 
 .adjacencylist{
 	position: absolute;
-    top: 400px;
-    left: 30px;
+    top: 450px;
+    left: 20px;
 }
 #inputEdge{
 	width: 97.8px;
     position: absolute;
     top: 50px;
+}
+
+#src-dest{
+	position: absolute;
+    top: 50px;
+    left: 100px;
+    width: 67px;
 }
 canvas {
 	display: block;

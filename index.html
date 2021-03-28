@@ -26,6 +26,11 @@
 			<span id = "distance" class="badge rounded-pill bg-primary">Distance</span>
 			<input type="text" class = "displayDistance">
 
+			<div class="plotting">
+				<!-- <button class="btn btn-dark" onclick = "flipcity()">PlotCities</button> -->
+				<button class="btn btn-dark" onclick = "flipgraph()">PlotGraph</button>
+			</div>
+
 			<span class="badge badge-pill badge-secondary mx-2" style="font-size: 15px" id = "interactiveText">Interactive mode</span>
 			<input type="checkbox"  id="interactive" onclick = "plot()">
 
@@ -36,8 +41,7 @@
 				 <h3>Algo</h3>
 				 <button id = "bruteforce" onclick = "flip()">Bruteforce</button>
 				 <br>
-				 <button id="plotGraph" onclick = "kuchAur()">BFS</button>
-				 <input type="checkbox" id="play">
+				 <button id="plotGraph" onclick = "flipBfs()" styele = "width : 20px;">BFS</button>
 			 </div>
 			 <div class = "speed">
 			 <h3 id = "speedText">Speed</h3>
@@ -46,6 +50,7 @@
 			 </div>
 			 <div class="adjacencylist">
 			<button type="button" id = "createEdge" class="btn btn-dark" onclick = "plotEdge()">CreateEdge</button>
+			 <input type="text" id = "src-dest" placeholder="Src-Dest">
 			<br>
 			<input type="text" id="inputEdge">
 			 </div>
