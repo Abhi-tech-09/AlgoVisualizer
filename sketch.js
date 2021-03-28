@@ -32,9 +32,20 @@ function flip() {
 }
 
 function flipgraph(){
+	if(graphFlag == 0){
+		document.querySelector("#plotGraphBtn").classList.remove("btn-dark");
+		document.querySelector("#plotGraphBtn").classList.add("btn-danger");
+		document.querySelector("#plotGraphBtn").innerHTML = "PlotCities";	
+	}
+	else{
+		document.querySelector("#plotGraphBtn").classList.remove("btn-danger");
+		document.querySelector("#plotGraphBtn").classList.add("btn-dark");
+		document.querySelector("#plotGraphBtn").innerHTML = "PlotGraph";	
+	}
   graphFlag ^= 1;
   
   document.getElementById("interactive").checked = true;
+
 }
 
 
@@ -183,7 +194,7 @@ function makeCities() {
 
 function makeConnection(){
   stroke(255);
-		strokeWeight(4);
+		strokeWeight(2);
 		noFill();
 		beginShape();
 		for (var i = 0; i < cities.length; i++) {
@@ -237,7 +248,12 @@ function implementAlgo() {
 		  
 	}
 	if (BFSflag) {
-			breadthFirstSearch(cities, 1, 7);
+		    var temp = document.querySelector("#src-dest").value.split("-");
+			var src = parseInt(temp[0]);
+			var dest = parseInt(temp[1]);
+			console.log(src , dest);
+			if(src && dest)
+				breadthFirstSearch(cities, src, dest);
 		
 	}
 }
