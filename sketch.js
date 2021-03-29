@@ -107,7 +107,7 @@ function getDefaultPoints() {
 		for (var i = 0; i < 5; ++i) {
 			cities.push(
 				new Point(
-					getRandom(toolsWidth, w - toolsWidth),
+					getRandom(toolsWidth, w - toolsWidth - 200),
 					getRandom(100, h - 100)
 				)
 			);
@@ -170,6 +170,8 @@ function plotEdge() {
 }
 
 function plotGraph() {
+	stroke(150); 
+	strokeWeight(2);
 	if (document.getElementById("interactive").checked == false)
 		for (var i = 0; i < node1.length; ++i) {
 			line(
@@ -185,19 +187,21 @@ function makeCities() {
 	for (var i = 0; i < cities.length; ++i) {
 		stroke(255);
 		strokeWeight(1);
+		noFill();
 		text(i + 1, cities[i].x - 30, cities[i].y - 20);
-		stroke("#35d925");
+		stroke("#56ff00");
 		strokeWeight(4);
-		circle(cities[order[i]].x, cities[order[i]].y, 20);
+		fill("#56ff00");
+		circle(cities[order[i]].x, cities[order[i]].y, 10);
 	}
 }
 
 function makeConnection(){
-  stroke(255);
-		strokeWeight(2);
-		noFill();
-		beginShape();
-		for (var i = 0; i < cities.length; i++) {
+	strokeWeight(2);
+	noFill();
+	beginShape();
+	for (var i = 0; i < cities.length; i++) {
+			stroke("#3128ba");
 			vertex(cities[order[i]].x, cities[order[i]].y);
 		}
 		endShape();
@@ -233,8 +237,9 @@ function draw() {
 function displayBestEver() {
 	beginShape();
 	for (var i = 0; i < bestEver.length; i++) {
-		strokeWeight(4);
-		stroke(100);
+		strokeWeight(2 ,0 , 0 , 50);
+		// colorMode("#66FF00");
+		stroke("#66FF00");
 		vertex(bestEver[i].x, bestEver[i].y);
 	}
 	endShape();
@@ -289,7 +294,7 @@ function bruteforce(cities) {
   console.log("working brutefore");
 	if (d < distance) {
 		distance = d;
-    console.log("Displaying best-Ever");
+		console.log("Displaying best-Ever");
 		bestEver = cities.slice();
 		document.querySelector(".displayDistance").value = distance.toFixed(2);
 	}
@@ -343,14 +348,8 @@ function breadthFirstSearch(cities, x, y) {
 				distance[adjlist[s][i]] = distance[s] + 1;
 				q.push(adjlist[s][i]);
 				pred[adjlist[s][i]] = s;
-
-				// if(adjlist[s][i] == y){
-				//   brk = 1;
-				//   break;
-				// }
 			}
 		}
-		// if(brk)break;
 	}
 	console.log(distance);
 	console.log(visited);
@@ -362,7 +361,8 @@ function breadthFirstSearch(cities, x, y) {
 		crawl = pred[crawl];
 	}
 	console.log("here is your path ", reverse(path));
-	stroke(4);
+	stroke(150 , 150 , 150 );
+	strokeWeight(2);
 	for (var i = 0; i < path.length - 1; ++i) {
 		line(
 			cities[path[i] - 1].x,
