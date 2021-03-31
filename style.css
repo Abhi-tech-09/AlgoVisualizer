@@ -1,42 +1,89 @@
-html,
 body {
 	margin: 0;
 	padding: 0;
+	/* background:green; */
 }
 
 body {
 	display: grid;
 	grid-template-columns: 2fr 3fr;
 	overflow: hidden;
+	/* background:green; */
 }
 
 .tools-wrapper {
-	
-	width: 200px;
+	border-top: 2mm ridge rgba(2, 2, 8, 0.657);
+	border-bottom: 3mm ridge rgba(2, 2, 8, 0.842);
+	border-left: 1mm ridge rgba(2, 2, 8, 0.753);
+	border-right: 2mm ridge rgba(2, 2, 8, 0.924);
+	width: 280px;
+
+	padding: 4%;
+	/* background-image: linear-gradient(to bottom right, #7c8288, #1a2027); */
+	padding: 5px;
+	/* background-color: #f69f9f; */
 
 	background-image: linear-gradient(to bottom right, #7c8288, #1a2027);
 }
-
+.head {
+	color: green;
+	left: 0px;
+	/* border:2px solid orange; */
+}
 #start {
 	position: absolute;
-	top: 20px;
-	left: 20px;
-	width: 160px;
+	top: 160px;
+	left: 30px;
+	line-height: 1em;
+	font-size: 20px;
+	padding: 5px;
+	width: 130px;
+	border: 3px solid lightgoldenrodyellow;
+	height: 40px;
+	background-color: limegreen;
+}
+#start:hover {
+	font-weight: 900;
+	letter-spacing: 1px;
+	stroke-width: 5;
+	stroke-dasharray: 15, 310;
+	stroke-dashoffset: 48;
+	transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+	background-color: red;
+}
+#enter_a_number {
+	position: absolute;
+	top: 70px;
+	left: 39px;
+	line-height: 1.9em;
+	font-size: 13px;
+	padding: 10%px;
+	border: 2px solid darkolivegreen;
 }
 
-#distance {
+#interactive {
+	position: absolute;
+	top: 70px;
+	left: 200px;
+	line-height: 1.9em;
+	font-size: 13px;
+}
+
+#defaultmode {
 	position: absolute;
 	top: 70px;
 	left: 10px;
 	line-height: 1.9em;
+	font-size: 13px;
 }
 
 .displayDistance {
-	line-height: 0.1em;
+	line-height: 1.6em;
 	width: 110px;
 	position: absolute;
 	top: 70px;
-	left: 80px;
+	left: 145px;
+	border: solid black;
 }
 
 .points {
@@ -44,40 +91,47 @@ body {
 	top: 110px;
 	left: 10px;
 }
-.plotting{
+
+.plotting {
 	position: absolute;
-    top: 110px;
-    width: 200px;
-    /* background-color: red; */
-    left: 30px;
-    padding: 2px;
+	top: 110px;
+	width: 200px;
+	/* background-color: red; */
+	left: 30px;
+	padding: 2px;
 }
 
 #interactiveText {
 	font-size: 15px;
 	position: absolute;
 	left: 2px;
-	top: 150px;
+	top: 120px;
+	margin-left: 4px;
+	/* width: 150px; */
+	border: 2px solid darkolivegreen;
 }
 
 #interactive {
 	position: absolute;
-	top: 160px;
+	top: 127.4px;
 	left: 150px;
+	border: solid black;
 }
 
 #defaultText {
 	font-size: 15px;
 	position: absolute;
-	top: 190px;
+	top: 160px;
+	border: 2px solid darkolivegreen;
 }
 
 #defaultSize {
 	position: absolute;
-	top: 190px;
-	width: 45px;
-	left: 122px;
+	top: 159.7px;
+	width: 110px;
+	left: 145px;
 	line-height: 2px;
+	border: solid black;
 }
 .Algo {
 	position: absolute;
@@ -87,26 +141,200 @@ body {
 .speed {
 	position: absolute;
 	top: 350px;
-	left: 50px;
+	left: 40px;
+	color: green;
+	margin-top: 3px;
+	width: 270px;
 }
 
-.adjacencylist{
+.adjacencylist {
 	position: absolute;
-    top: 450px;
-    left: 20px;
+	top: 450px;
+	left: 40px;
+	width: 277px;
 }
-#inputEdge{
-	width: 97.8px;
-    position: absolute;
-    top: 50px;
-}
-
-#src-dest{
+#inputEdge {
 	position: absolute;
-    top: 50px;
-    left: 100px;
-    width: 67px;
+	top: 130px;
+	left: -20px;
+	line-height: 1em;
+	font-size: 10px;
+	padding: 5px;
+	width: 110px;
+	border: 2px solid black;
+}
+#src-dest {
+	position: absolute;
+	top: 130px;
+	left: 110px;
+	line-height: 1em;
+	font-size: 10px;
+	padding: 5px;
+	width: 110px;
+	border: 2px solid black;
 }
 canvas {
 	display: block;
+}
+
+#bruteforce {
+	position: absolute;
+	top: 90px;
+	left: 121px;
+	width: 110px;
+	padding: 0px;
+	border: solid black;
+	background-color: #ffff80;
+}
+
+#bruteforce:hover {
+	font-weight: 900;
+	letter-spacing: 1px;
+	stroke-width: 5;
+	stroke-dasharray: 15, 310;
+	stroke-dashoffset: 48;
+	transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+	background-color: red;
+}
+#plotGraph {
+	position: absolute;
+	top: 90px;
+	left: -32px;
+	width: 110px;
+	padding: 0px;
+	border: solid black;
+	background-color: #ffff80;
+}
+#plotGraph:hover {
+	font-weight: 900;
+	letter-spacing: 1px;
+	stroke-width: 5;
+	stroke-dasharray: 15, 310;
+	stroke-dashoffset: 48;
+	transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+	background-color: red;
+}
+.head {
+	color: green;
+	left: 20px;
+}
+#increase {
+	position: center;
+	top: 70px;
+	left: 10px;
+	width: 60px;
+	padding: 0px;
+	border: solid black;
+	background-color: #ffff80;
+}
+#decrease {
+	position: center;
+	top: 70px;
+	left: 10px;
+	width: 60px;
+	padding: 0px;
+	border: solid black;
+	background-color: #ffff80;
+}
+#increase:hover,
+#increase:focus {
+	font-weight: 900;
+	letter-spacing: 1px;
+	stroke-width: 5;
+	stroke-dasharray: 15, 310;
+	stroke-dashoffset: 48;
+	transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+	background-color: red;
+}
+#decrease:hover {
+	font-weight: 900;
+	letter-spacing: 1px;
+	stroke-width: 5;
+	stroke-dasharray: 15, 310;
+	stroke-dashoffset: 48;
+	transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+	background-color: red;
+}
+/* #createEdge{
+    font-size:14px:
+} */
+.btn-secondary {
+	height: 35px;
+	padding: 1px;
+	position: absolute;
+	left: 50px;
+	border: 2px solid black;
+}
+.btn-secondary:hover {
+	background-color: #4caf50;
+	color: orange;
+}
+.heading {
+	top: 300px;
+	color: green;
+	left: 70px;
+}
+#plotGraphBtn {
+	position: absolute;
+	top: 110px;
+	left: 49.5px;
+	border: 2px solid orange;
+}
+.btn-secondary {
+	height: 35px;
+	padding: 1px;
+	position: absolute;
+	left: 60px;
+	background-color: #ffff80;
+	color: red;
+}
+.badge bg-dark {
+	height: 35px;
+	padding: 1px;
+	position: absolute;
+	left: 60px;
+}
+/* #final{
+    margin: 3px;
+    border: 2px solid black;
+    left: 30px;
+} */
+hr {
+	color: green;
+	border: 2px solid black;
+	width: 267.1px;
+	left: 5px;
+	position: absolute;
+	top: 40px;
+}
+#hr1 {
+	color: green;
+	border: 2px solid black;
+	width: 267.1px;
+	left: -25px;
+	position: absolute;
+	top: 80px;
+}
+#hr3 {
+	color: black;
+	border: 2px solid;
+	width: 267.1px;
+	left: -35px;
+	position: absolute;
+	top: 0px;
+}
+.head1 {
+	/* border:2px solid orange; */
+	width: 190px;
+}
+.head3 {
+	/* border:3px solid orange; */
+	width: 200px;
+}
+.btn-danger {
+	margin: 3px;
+	position: absolute;
+	left: 30px;
+	border: 2px solid orange;
+	top: 82px;
 }

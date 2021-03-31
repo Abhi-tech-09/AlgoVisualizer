@@ -59,8 +59,8 @@ function Point(x, y) {
 function plot() {
 	var f = document.getElementById("interactive").checked;
 	distance = 0 ;
-  if(bruteforceFlag == 1)bruteforceFlag = 0 ;
-  else if(BFSflag == 1) BFSflag = 0;
+//   if(bruteforceFlag == 1)bruteforceFlag = 0 ;
+//   else if(BFSflag == 1) BFSflag = 0;
 	if (f) {
 		bestEver = [];
 		cities = [];
@@ -184,24 +184,25 @@ function plotGraph() {
 }
 
 function makeCities() {
-	for (var i = 0; i < cities.length; ++i) {
+	for(var i = 0 ; i < cities.length ; ++i){
 		stroke(255);
 		strokeWeight(1);
-		noFill();
 		text(i + 1, cities[i].x - 30, cities[i].y - 20);
-		stroke("#56ff00");
-		strokeWeight(4);
-		fill("#56ff00");
+	}
+	for (var i = 0; i < cities.length; ++i) {
+		stroke("#800080");
+		fill("#800080");
+		strokeWeight(2);
 		circle(cities[order[i]].x, cities[order[i]].y, 10);
 	}
 }
 
 function makeConnection(){
 	strokeWeight(2);
-	noFill();
-	beginShape();
-	for (var i = 0; i < cities.length; i++) {
-			stroke("#3128ba");
+		noFill();
+		beginShape();
+		for (var i = 0; i < cities.length; i++) {
+			stroke("#ff0000")
 			vertex(cities[order[i]].x, cities[order[i]].y);
 		}
 		endShape();
@@ -237,12 +238,11 @@ function draw() {
 function displayBestEver() {
 	beginShape();
 	for (var i = 0; i < bestEver.length; i++) {
-		strokeWeight(2 ,0 , 0 , 50);
-		// colorMode("#66FF00");
-		stroke("#66FF00");
+		strokeWeight(6);
+		stroke("#4D33ff33");
 		vertex(bestEver[i].x, bestEver[i].y);
 	}
-	endShape();
+	endShape();	
 }
 
 function implementAlgo() {
@@ -324,7 +324,6 @@ function calDistance(points) {
 }
 
 function breadthFirstSearch(cities, x, y) {
-  graphFlag ^= 1;
 	q = [];
 	q.push(x);
 	visited = [];
@@ -361,8 +360,8 @@ function breadthFirstSearch(cities, x, y) {
 		crawl = pred[crawl];
 	}
 	console.log("here is your path ", reverse(path));
-	stroke(150 , 150 , 150 );
-	strokeWeight(2);
+	stroke("#33ff33");
+	strokeWeight(3);
 	for (var i = 0; i < path.length - 1; ++i) {
 		line(
 			cities[path[i] - 1].x,
