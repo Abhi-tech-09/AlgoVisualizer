@@ -1,0 +1,11 @@
+#canvas{
+    position : relative ; 
+    left : 300px ;  
+}
+body{
+    background-color : black;
+}
+
+#start{
+    position: absolute;
+}
