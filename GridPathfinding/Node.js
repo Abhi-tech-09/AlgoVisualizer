@@ -8,6 +8,7 @@ function Node(row , col , x , y , state , total_rows , total_cols){
     this.state = state ;
     this.neighbors = [] ; 
     this.distance = Infinity ; 
+    this.visited = false ; 
 }
 
 Node.prototype.draw_node = function(ctx,gap){

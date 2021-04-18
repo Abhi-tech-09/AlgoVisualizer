@@ -6,6 +6,11 @@ body{
     background-color : black;
 }
 
-#start{
+.btn-group{
     position: absolute;
+}
+
+#Visualize{
+    position: absolute;
+    top : 50px ; 
 }

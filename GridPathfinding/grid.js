@@ -117,15 +117,42 @@ function up(){
     canvas.onmousemove = null ; 
 }
 
-function start(){ 
+
+
+
+
+
+const setPath = async(parent) =>{
+    crawl = parent.get(finishNode) ; 
+    while(crawl != -1){
+        await sleep(100) ; 
+        if(crawl != startNode && crawl != finishNode)
+            crawl.state = 'p' ;
+        crawl = parent.get(crawl) ; 
+    }
+}
+
+function callDijkstra(){
     for (var r = 0 ; r < total_rows ; r++){
         for(var c = 0 ; c < total_cols ; c++){
             grid[r][c].updateNeighbors(); 
         }
     }
 
-    arr = dijkstra(startNode , finishNode) ;
-    // console.log(arr) ; 
+    
+    parent = dijkstra(startNode , finishNode) ; 
+    setPath(parent) ;
+    
+}
+
+function callBFS(){
+    for (var r = 0 ; r < total_rows ; r++){
+        for(var c = 0 ; c < total_cols ; c++){
+            grid[r][c].updateNeighbors(); 
+        }
+    }
+
+    arr = bfs(startNode , finishNode) ; 
     a = arr[0] ; 
     for (var i = 0 ; i < a.length ; i++){
         if(a[i].state != 's' && a[i].state != 'f')
@@ -133,13 +160,19 @@ function start(){
     }
 
     parent = arr[1] ; 
-    console.log(parent);
     crawl = parent.get(finishNode) ; 
     while(crawl != -1){
         if(crawl != startNode && crawl != finishNode)
             crawl.state = 'p' ;
         crawl = parent.get(crawl) ; 
     }
+
+}
+
+
+
+function start(){ 
+    
 }
 
 

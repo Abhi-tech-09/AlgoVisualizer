@@ -16,12 +16,23 @@
 </head>
 <body style="margin:0px; padding:0px; overflow:hidden;">
 
-    <button type="button" id = "start" class="btn btn-primary" onclick = "start()">Start</button>
+    <div class="btn-group">
+        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Algorithms
+        </button>
+        <ul class="dropdown-menu">
+          <li><button id = "Dijkstra" onclick="callDijkstra()" class="dropdown-item" href="#">Dijkstra</button></li>
+          <li><button id = "BFS" onclick = "callBFS()" class="dropdown-item" href="#">BFS</button></li>
+          <li><button id = "Astar" class="dropdown-item" href="#">A* </button></li>
+        </ul>
+      </div>
+
+      <button type="button" id = "Visualize" class="btn btn-primary btn-lg">Visualize</button>
 
     <canvas id = "canvas"  width = "1200" height = "800"></canvas>
 
 
-
+    <script src="bfs.js"></script>
     <script src = "dijkstra.js"></script>
     <script src="node.js"></script>
     <script src="grid.js"></script>  

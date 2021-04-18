@@ -336,7 +336,6 @@ function breadthFirstSearch(cities, x, y) {
 	distance[x] = 0;
 	var brk = 0;
 	visited[x] = 1;
-	console.log("Working.");
 	while (q.length != 0) {
 		s = q[0];
 		q.shift();
