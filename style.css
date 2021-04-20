@@ -180,8 +180,8 @@ canvas {
 #bruteforce {
 	position: absolute;
 	top: 90px;
-	left: 121px;
-	width: 110px;
+	left: 11px;
+	width: 90px;
 	padding: 0px;
 	border: solid black;
 	background-color: #ffff80;
@@ -200,7 +200,7 @@ canvas {
 	position: absolute;
 	top: 90px;
 	left: -32px;
-	width: 110px;
+	width: 40px;
 	padding: 0px;
 	border: solid black;
 	background-color: #ffff80;
@@ -214,6 +214,14 @@ canvas {
 	transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
 	background-color: red;
 }
+
+#clear{
+	position:absolute; 
+	left : 110px;
+	top : 90px;
+}
+
+
 .head {
 	color: green;
 	left: 20px;
