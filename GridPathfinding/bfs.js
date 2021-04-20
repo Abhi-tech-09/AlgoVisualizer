@@ -11,6 +11,7 @@ function bfs(startNode , finishNode){
         q.shift() ; 
 
         visitedNodes.push(frontNode);
+        updateVisited(visitedNodes); 
         if(frontNode == finishNode){
             return [visitedNodes , parent] ; 
         }
@@ -26,6 +27,5 @@ function bfs(startNode , finishNode){
         } 
     }
     return [visitedNodes , parent] ; 
-
 
 }

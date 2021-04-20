@@ -122,10 +122,10 @@ function up(){
 
 
 
-const setPath = async(parent) =>{
+function setPath(parent){
     crawl = parent.get(finishNode) ; 
     while(crawl != -1){
-        await sleep(100) ; 
+        // await sleep(100) ; 
         if(crawl != startNode && crawl != finishNode)
             crawl.state = 'p' ;
         crawl = parent.get(crawl) ; 
@@ -169,6 +169,14 @@ function callBFS(){
 
 }
 
+function callDFS(){
+    for (var r = 0 ; r < total_rows ; r++){
+        for(var c = 0 ; c < total_cols ; c++){
+            grid[r][c].updateNeighbors(); 
+        }
+    }
+     dfs(startNode , finishNode) ;
+}
 
 
 function start(){ 

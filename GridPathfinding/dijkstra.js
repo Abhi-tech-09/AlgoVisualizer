@@ -19,7 +19,6 @@ function dijkstra(start , finish){
         }
 
         var neighbor = closestNode.neighbors ; 
-        console.log("neighbor" , neighbor) ; 
         for (var i = 0 ; i < neighbor.length ; i++){
             if(neighbor[i].distance > (closestNode.distance + 1)){
                 parent.set(neighbor[i] , closestNode) ; 
@@ -27,7 +26,6 @@ function dijkstra(start , finish){
                 q.push(neighbor[i]) ; 
             }
         }
-        console.log("queue" , q);
     }
     return parent ; 
     
@@ -37,13 +35,11 @@ function cmp(nodeA  ,nodeB){
     return nodeA.distance - nodeB.distance ; 
 }
 
-const sleep = (time) => {
-    return new Promise((resolve) => setTimeout(resolve , time)) ; 
-}
+
 
 const updateVisited = async(visitedNodes) => {
     for (var i = 0 ; i < visitedNodes.length ; i++){
-        if(visitedNodes[i].state != 's' && visitedNodes[i].state != 'f' ){
+        if(visitedNodes[i].state != 's' && visitedNodes[i].state != 'f' && visitedNodes[i].state != 'p' ){
             await sleep(5) ; 
             visitedNodes[i].state = 'd' ; 
         }

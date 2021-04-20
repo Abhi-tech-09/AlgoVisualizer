@@ -56,3 +56,6 @@ Node.prototype.updateNeighbors = function(){
         this.neighbors.push(grid[this.row][this.col+1]) ;
     }
 }
+const sleep = (time) => {
+    return new Promise((resolve) => setTimeout(resolve , time)) ; 
+}
