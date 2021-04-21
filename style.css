@@ -205,6 +205,12 @@ canvas {
 	border: solid black;
 	background-color: #ffff80;
 }
+#dijkstra{
+	
+    top: 150px;
+    width: 220px;
+
+}
 #plotGraph:hover {
 	font-weight: 900;
 	letter-spacing: 1px;

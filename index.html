@@ -34,8 +34,7 @@
     <span class="badge rounded-pill bg-primary" style="font-size: 15px" id = "interactiveText">Interactive mode</span>
     <input type="checkbox"  id="interactive" onclick = "plot()">
 
-    <span class="badge rounded-pill bg-primary  " style="font-size: 15px" id = "defaultText">Default mode</span>
-    <input type="number"  id="defaultSize" >
+    <button id = "dijkstra" class="btn btn-danger" onclick = "callDijkstra()">Dijkstra</button>
     
   <div class="plotting">
 				<!-- <button class="btn btn-dark" onclick = "flipcity()">PlotCities</button> -->
@@ -100,6 +99,7 @@
 </div>
 
  <script src="mess.js"></script>
+ <script src="lineDijkstra.js"></script>
 <script src="sketch.js"></script>
 <script src = "libraries/p5.min.js"></script>
 <!-- <script src = "libraries/p5.sound.min.js"></script> -->

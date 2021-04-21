@@ -11,7 +11,7 @@ var fr = 10;
 var bestEver = [];
 var start = 1;
 var BFSflag = 0;
-var graphFlag = 0 ;
+var graphFlag = 0;
 var adjlist = new Map();
 //For graphs make two arrays to store which two nodes we must connect;
 var node1 = [];
@@ -31,52 +31,50 @@ function flip() {
 	bruteforceFlag ^= 1;
 }
 
-function flipgraph(){
-	if(graphFlag == 0){
+function flipgraph() {
+	if (graphFlag == 0) {
 		document.querySelector("#plotGraphBtn").classList.remove("btn-dark");
 		document.querySelector("#plotGraphBtn").classList.add("btn-danger");
-		document.querySelector("#plotGraphBtn").innerHTML = "PlotCities";	
+		document.querySelector("#plotGraphBtn").innerHTML = "PlotCities";
 	}
-	else{
+	else {
 		document.querySelector("#plotGraphBtn").classList.remove("btn-danger");
 		document.querySelector("#plotGraphBtn").classList.add("btn-dark");
-		document.querySelector("#plotGraphBtn").innerHTML = "PlotGraph";	
+		document.querySelector("#plotGraphBtn").innerHTML = "PlotGraph";
 	}
-  graphFlag ^= 1;
-  
-  document.getElementById("interactive").checked = true;
+	graphFlag ^= 1;
+
+	document.getElementById("interactive").checked = true;
 
 }
 
 
 //Point plotting Functions
 
-function Point(x, y) {
+function Point(x, y , i = -1) {
 	this.x = x;
 	this.y = y;
-	this.state = 'e' ; 
+	this.index = i ; 
+	this.state = 'e';
+	this.neighbors = [];
+	this.distance = Infinity;
 }
 
 function plot() {
 	var f = document.getElementById("interactive").checked;
-	distance = 0 ;
-//   if(bruteforceFlag == 1)bruteforceFlag = 0 ;
-//   else if(BFSflag == 1) BFSflag = 0;
+	distance = 0;
+	//   if(bruteforceFlag == 1)bruteforceFlag = 0 ;
+	//   else if(BFSflag == 1) BFSflag = 0;
 	if (f) {
 		bestEver = [];
 		cities = [];
 		order = [];
 		node1 = [];
 		node2 = [];
-		document.getElementById("defaultSize").disabled = true;
-		document.getElementById("defaultText").style.opacity = "0.5";
-		document.getElementById("defaultSize").style.opacity = "0.5";
 		document
 			.getElementById("canvas")
 			.addEventListener("mousedown", getPoints);
 	} else {
-		document.getElementById("defaultText").style.opacity = "1";
-		document.getElementById("defaultSize").style.opacity = "1";
 		document
 			.getElementById("canvas")
 			.removeEventListener("mousedown", getPoints);
@@ -86,68 +84,22 @@ function plot() {
 function getPoints(event) {
 	cities.push(new Point(event.clientX - toolsWidth, event.clientY));
 	order[cities.length - 1] = cities.length - 1;
-  
-  distance = calDistance(cities);
-  document.querySelector(".displayDistance").value = distance.toFixed(
-    2
-  );
+
+	distance = calDistance(cities);
+	document.querySelector(".displayDistance").value = distance.toFixed(
+		2
+	);
 }
 
 function getRandom(x, y) {
 	return Math.floor(Math.random() * (y - x + 1)) + x;
 }
 
-function getDefaultPoints() {
-	bestEver = [];
-	cities = [];
-	order = [];
-	document.getElementById("defaultSize").disabled = false;
-	var n = document.getElementById("defaultSize").value;
-	if (n == "") {
-		for (var i = 0; i < 5; ++i) {
-			cities.push(
-				new Point(
-					getRandom(toolsWidth, w - toolsWidth - 200),
-					getRandom(100, h - 100)
-				)
-			);
-			order[i] = i;
-		}
-	}
 
-	document
-		.getElementById("defaultSize")
-		.addEventListener("keyup", function () {
-			cities = [];
-			order = [];
-			var n = document.getElementById("defaultSize").value;
-			if (n == "") {
-				for (var i = 0; i < 10; ++i) {
-					cities.push(
-						new Point(
-							getRandom(toolsWidth, w - 100),
-							getRandom(100, h - 100)
-						)
-					);
-					order[i] = i;
-				}
-			} else {
-				for (var i = 0; i <= parseInt(n); ++i) {
-					cities.push(
-						new Point(
-							getRandom(toolsWidth, w - 100),
-							getRandom(100, h - 100)
-						)
-					);
-					order[i] = i;
-				}
-			}
-		});
-}
 
 function plotEdge() {
 	str = document.querySelector("#inputEdge").value;
-  document.getElementById("interactive").checked = false;
+	document.getElementById("interactive").checked = false;
 	ind = str.split("-");
 	node1.push(ind[0] - 1);
 	node2.push(ind[1] - 1);
@@ -165,11 +117,11 @@ function plotEdge() {
 	} else {
 		adjlist[ind[1]].push(parseInt(ind[0]));
 	}
-	
+
 }
 
 function plotGraph() {
-	stroke(150); 
+	stroke(150);
 	strokeWeight(2);
 	if (document.getElementById("interactive").checked == false)
 		for (var i = 0; i < node1.length; ++i) {
@@ -183,7 +135,7 @@ function plotGraph() {
 }
 
 function makeCities() {
-	for(var i = 0 ; i < cities.length ; ++i){
+	for (var i = 0; i < cities.length; ++i) {
 		stroke(255);
 		strokeWeight(1);
 		text(i + 1, cities[i].x - 30, cities[i].y - 20);
@@ -196,15 +148,15 @@ function makeCities() {
 	}
 }
 
-function makeConnection(){
+function makeConnection() {
 	strokeWeight(2);
-		noFill();
-		beginShape();
-		for (var i = 0; i < cities.length; i++) {
-			stroke("#ff0000")
-			vertex(cities[order[i]].x, cities[order[i]].y);
-		}
-		endShape();
+	noFill();
+	beginShape();
+	for (var i = 0; i < cities.length; i++) {
+		stroke("#ff0000")
+		vertex(cities[order[i]].x, cities[order[i]].y);
+	}
+	endShape();
 }
 
 
@@ -215,23 +167,23 @@ function displayBestEver() {
 		stroke("#4D33ff33");
 		vertex(bestEver[i].x, bestEver[i].y);
 	}
-	endShape();	
+	endShape();
 }
 
 function implementAlgo() {
 	if (bruteforceFlag && !graphFlag) {
 		document.getElementById("interactive").checked = false;
-      displayBestEver();
-      bruteforce(cities);
-		  
+		displayBestEver();
+		bruteforce(cities);
+
 	}
 	if (BFSflag) {
-		    var temp = document.querySelector("#src-dest").value.split("-");
-			var src = parseInt(temp[0]);
-			var dest = parseInt(temp[1]);
-			if(src && dest)
-				breadthFirstSearch(cities, src, dest);
-		
+		var temp = document.querySelector("#src-dest").value.split("-");
+		var src = parseInt(temp[0]);
+		var dest = parseInt(temp[1]);
+		if (src && dest)
+			breadthFirstSearch(cities, src, dest);
+
 	}
 }
 
@@ -246,12 +198,12 @@ function next_permutation(temp) {
 
 	let len = temp.length - 1,
 		i;
-	for (i = len - 1; temp[i] >= temp[i + 1]; ) i--;
+	for (i = len - 1; temp[i] >= temp[i + 1];) i--;
 	let j = i + 1,
 		k = len;
 	while (j < k) swap(j++, k--);
 	if (i >= 0) {
-		for (j = i + 1; temp[i] >= temp[j]; ) j++;
+		for (j = i + 1; temp[i] >= temp[j];) j++;
 		swap(i, j);
 	}
 	// console.log("Cities" , cities);
