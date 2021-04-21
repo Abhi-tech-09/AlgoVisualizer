@@ -3,6 +3,9 @@ var stopMess = 0;
 var nodes = [];
 var lines = [] ; 
 var index = 0 ; 
+var nodeSelected = 0 ; 
+var startNode = new Point(0 , 0); 
+var finishNode = new Point(0 ,0); 
 var p1 = new Point(0, 0);
 var p2 = new Point(0, 0);
 Point.prototype.drawPoint = function(){
@@ -49,6 +52,9 @@ function mouseclicked(e) {
 
 function reset() {
 	stopMess = 1;
+	nodes = [] ; 
+	lines = [] ; 	
+	nodeSelected = 0 ; 
 }
 
 function check(e) {
@@ -58,15 +64,26 @@ function check(e) {
 	for (var i = 0; i < nodes.length; i++) {
 		if (dist(curr.x, curr.y, nodes[i].x, nodes[i].y) <= 10) {
 			nodes[i].state = 'p';
-			if (p1.x == 0 && p1.y == 0) {
-				p1 = new Point(nodes[i].x, nodes[i].y);
-			}
-			else if (p2.x == 0 && p2.y == 0 && (nodes[i].x != p1.x && nodes[i].y != p1.y)) {
-				p2 = new Point(nodes[i].x, nodes[i].y);
-				lines.push(new Line(p1 , p2 , dist(p1.x,p1.y,p2.x,p2.y)));
-				p1 = new Point(0, 0);
-				p2 = new Point(0, 0);
+			if(!nodeSelected){
+				if (p1.x == 0 && p1.y == 0) {
+					p1 = new Point(nodes[i].x, nodes[i].y);
+				}
+				else if (p2.x == 0 && p2.y == 0 && (nodes[i].x != p1.x && nodes[i].y != p1.y)) {
+					p2 = new Point(nodes[i].x, nodes[i].y);
+					lines.push(new Line(p1 , p2 , dist(p1.x,p1.y,p2.x,p2.y)));
+					p1 = new Point(0, 0);
+					p2 = new Point(0, 0);
 
+				}
+			}
+			else{
+				if(startNode.x == 0 && startNode.y == 0){
+					startNode = nodes[i];
+				}
+				else{
+					finishNode = nodes[i] ; 
+					nodeSelected ^= 1 ; 
+				}
 			}
 		}
 	}
@@ -96,16 +113,30 @@ function updateNeighbors(){
     
 }
 
+function selectNode(){
+	if(startNode.x == 0 && startNode.y == 0){
+		nodeSelected ^= 1 ; 
+		document.getElementById("selectNode").classList.remove("btn-success");
+		document.getElementById("selectNode").classList.add("btn-danger");
+		document.getElementById("selectNode").innerHTML = "FinishNode" ; 
+	}
+	else{
+		document.getElementById("selectNode").classList.remove("btn-danger");
+		document.getElementById("selectNode").classList.add("btn-success");
+		document.getElementById("selectNode").innerHTML = "StartNode" ;
+		startNode = new Point(0 , 0 ) ; 
+		finishNode = new Point(0 , 0) ; 
+	}
+}
+
 function callDijkstra(){
 	updateNeighbors() ; 
 	for(var i = 0 ; i < nodes.length ; i++){
 		console.log(nodes[i].neighbors);
 	}
-	var parent = lineDijkstra(nodes[0] , nodes[3] , lines , nodes) ; 
+	var parent = lineDijkstra(startNode , finishNode , lines , nodes) ; 
 	console.log(parent); 
 }
-
-
 
 function setup() {
 	let canvas = createCanvas(w - toolsWidth, h);
@@ -117,6 +148,7 @@ function setup() {
 
 
 function draw() {
+	// console.log(startNode);
 	background(0);
 	frameRate(fr);
 	if (!stopMess) {

@@ -285,3 +285,9 @@ function breadthFirstSearch(cities, x, y) {
 		);
 	}
 }
+
+const sleep = (time) => {
+    return new Promise(
+        (resolve) => setTimeout(resolve , time)
+        ); 
+}

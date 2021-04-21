@@ -208,8 +208,15 @@ canvas {
 #dijkstra{
 	
     top: 150px;
-    width: 220px;
+    width: 80px;
 
+}
+#selectNode{
+
+		top: 154.3px;
+		position: absolute;
+		left: 131px;
+	
 }
 #plotGraph:hover {
 	font-weight: 900;

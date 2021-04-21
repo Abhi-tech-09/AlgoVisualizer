@@ -55,9 +55,10 @@ function getLine(p1 , p2 , lines){
     }
 }
 
-function updateLines(parent , finishNode , lines){
+async function updateLines(parent , finishNode , lines){
     var crawl = finishNode; 
     while(crawl != -1){
+        await sleep(1000) ; 
         var l = getLine(crawl , parent.get(crawl) , lines); 
         l.state = 'p' ; 
         crawl = parent.get(crawl) ; 
