@@ -13,9 +13,10 @@ function dijkstra(start , finish){
         q.shift() ; 
 
         visitedNodes.push(closestNode) ; 
-        updateVisited(visitedNodes) ;
         if(closestNode == finish){
-            return parent;
+           var r = setPath(parent , visitedNodes , finishNode);
+           console.log(r);
+           return parent ; 
         }
 
         var neighbor = closestNode.neighbors ; 
@@ -27,21 +28,42 @@ function dijkstra(start , finish){
             }
         }
     }
-    return parent ; 
+    return parent ;
     
+}
+
+async function setPath(parent , visitedNodes , finishNode){
+    await updateVisited(visitedNodes);
+    crawl = parent.get(finishNode) ; 
+    while(crawl != -1){
+        await sleep(100) ; 
+        if(crawl != startNode && crawl != finishNode)
+            crawl.state = 'p' ;
+        crawl = parent.get(crawl) ; 
+    }
+    return "Path found" ; 
 }
 
 function cmp(nodeA  ,nodeB){
     return nodeA.distance - nodeB.distance ; 
 }
 
-
-
-const updateVisited = async(visitedNodes) => {
+async function updateVisited(visitedNodes){
     for (var i = 0 ; i < visitedNodes.length ; i++){
         if(visitedNodes[i].state != 's' && visitedNodes[i].state != 'f' && visitedNodes[i].state != 'p' ){
-            await sleep(5) ; 
+            await sleep(2) ; 
             visitedNodes[i].state = 'd' ; 
         }
     }
+    return new Promise(function(resolve , reject){
+        setTimeout(() => {
+            const check = true ; 
+            if(check){
+                resolve();
+            }
+            else{
+                reject();
+            }
+        }, 1000);
+    });
 }

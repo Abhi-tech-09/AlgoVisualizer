@@ -57,5 +57,7 @@ Node.prototype.updateNeighbors = function(){
     }
 }
 const sleep = (time) => {
-    return new Promise((resolve) => setTimeout(resolve , time)) ; 
+    return new Promise(
+        (resolve) => setTimeout(resolve , time)
+        ); 
 }
