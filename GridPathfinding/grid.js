@@ -21,7 +21,6 @@ for (var r = 0 ; r < total_rows ; r++){
     }
 }
 
-
 function draw(){
     clear() ; 
     ctx.fillStyle = "black" ; 
@@ -46,8 +45,8 @@ function initialise(){
     return setInterval(draw , 10) ; 
 }
 
-var pressX ; 
-var pressY ;
+var pressX = 0 ; 
+var pressY  = 0 ;
 var clicked = 0 ;
 function drag(e){
     var mx = e.clientX - canvas.offsetLeft ; 
@@ -117,21 +116,23 @@ function up(){
     canvas.onmousemove = null ; 
 }
 
-
 function callDijkstra(){
+
+    resetNodes();
+    
     for (var r = 0 ; r < total_rows ; r++){
         for(var c = 0 ; c < total_cols ; c++){
             grid[r][c].updateNeighbors(); 
         }
     }
-
-    
     parent = dijkstra(startNode , finishNode) ; 
-    // setPath(parent) ;
     
 }
 
 function callBFS(){
+
+    resetNodes() ;
+
     for (var r = 0 ; r < total_rows ; r++){
         for(var c = 0 ; c < total_cols ; c++){
             grid[r][c].updateNeighbors(); 
@@ -143,6 +144,9 @@ function callBFS(){
 }
 
 function callDFS(){
+
+    resetNodes() ; 
+
     for (var r = 0 ; r < total_rows ; r++){
         for(var c = 0 ; c < total_cols ; c++){
             grid[r][c].updateNeighbors(); 
@@ -151,11 +155,43 @@ function callDFS(){
      dfs(startNode , finishNode) ;
 }
 
-
-function start(){ 
-    
+function callAstar(){
+    resetNodes() ; 
+    for (var r = 0 ; r < total_rows ; r++){
+        for(var c = 0 ; c < total_cols ; c++){
+            grid[r][c].updateNeighbors(); 
+        }
+    }
+    astar(startNode , finishNode , grid) ; 
+    console.log(heuristic(startNode , finishNode));
 }
 
+function resetNodes(){
+    for(var i = 0 ; i < total_rows ; i++){
+        for(var j = 0 ; j < total_cols ; j++){
+            if(grid[i][j].state == 'd' || grid[i][j].state == 'p'){
+                grid[i][j].state = 'e';
+            }
+            grid[i][j].neighbors = [] ; 
+            grid[i][j].distance = Infinity ; 
+            grid[i][j].visited = false ; 
+        }
+    }
+}
+
+function reset(){
+   for(var i = 0 ; i < total_rows ; i++){
+       for(var j = 0 ; j < total_cols ; j++){
+           grid[i][j].state = 'e' ; 
+           grid[i][j].neighbors = [] ; 
+           grid[i][j].distance = Infinity ; 
+           grid[i][j].visited = false ; 
+       }
+   }
+   pressX =  new Node() ; 
+   pressY =  new Node() ; 
+   clicked = 0;
+}
 
 initialise();
 canvas.onmousedown = pressed ; 

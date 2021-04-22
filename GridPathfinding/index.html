@@ -24,18 +24,20 @@
           <li><button id = "Dijkstra" onclick="callDijkstra()" class="dropdown-item" href="#">Dijkstra</button></li>
           <li><button id = "BFS" onclick = "callBFS()" class="dropdown-item" href="#">BFS</button></li>
           <li><button id = "DFS"  onclick = "callDFS()" class="dropdown-item" href="#">DFS</button></li>
+          <li><button id = "astar"  onclick = "callAstar()" class="dropdown-item" href="#">A*</button></li>
         </ul>
       </div>
 
-      <button type="button" id = "Visualize" class="btn btn-primary btn-lg">Visualize</button>
+      <button type="button" id = "Visualize" onclick = "reset()" class="btn btn-primary btn-lg">Reset</button>
 
     <canvas id = "canvas"  width = "1200" height = "800"></canvas>
 
 
     <script src="node.js"></script>
     <script src = "dijkstra.js"></script>
-    <script src = "dfs.js"></script>
     <script src="bfs.js"></script>
+    <script src = "dfs.js"></script>
+    <script src="astar.js"></script>
     <script src="grid.js"></script> 
     <script 
         src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
