@@ -1,7 +1,6 @@
 var stopMess = 0;
-
-var nodes = [];
-var lines = [] ; 
+var nodes = []; // Nodes 
+var lines = [] ; //Edge Table 
 var index = 0 ; 
 var nodeSelected = 0 ; 
 var startNode = new Point(0 , 0); 
