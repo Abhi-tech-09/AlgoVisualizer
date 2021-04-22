@@ -8,15 +8,19 @@ var startNode = new Point(0 , 0);
 var finishNode = new Point(0 ,0); 
 var p1 = new Point(0, 0);
 var p2 = new Point(0, 0);
+
 Point.prototype.drawPoint = function(){
 	 if(this.state == 'e'){
 		stroke('#33ff33');
 		fill(51);
 	 }
-	 else if(this.state == 'p'){
-		fill('rgba(0,255,0, 0.25)');
-		this.state = 'e';
+	 else if(this.state == 's'){
+		 fill('#00FF00');
 	 }
+	 else if(this.state == 'f'){
+		 fill('#FF0000');
+	 }
+	 
 	circle(this.x, this.y, 20);
 }
 
@@ -63,7 +67,6 @@ function check(e) {
 	var curr = new Point(x, y);
 	for (var i = 0; i < nodes.length; i++) {
 		if (dist(curr.x, curr.y, nodes[i].x, nodes[i].y) <= 10) {
-			nodes[i].state = 'p';
 			if(!nodeSelected){
 				if (p1.x == 0 && p1.y == 0) {
 					p1 = new Point(nodes[i].x, nodes[i].y);
@@ -79,10 +82,12 @@ function check(e) {
 			else{
 				if(startNode.x == 0 && startNode.y == 0){
 					startNode = nodes[i];
+					startNode.state = 's'  ;
 				}
 				else{
 					finishNode = nodes[i] ; 
-					nodeSelected ^= 1 ; 
+					finishNode.state = 'f' ; 
+					nodeSelected = 0 ; 
 				}
 			}
 		}
@@ -90,7 +95,7 @@ function check(e) {
 
 }
 
-function search(point){
+function searchNode(point){
 	for(var i = 0 ; i < nodes.length ; i++){
 		if(point.x == nodes[i].x && point.y == nodes[i].y){
 			return nodes[i] ; 
@@ -103,10 +108,10 @@ function updateNeighbors(){
     for(var i = 0 ; i < nodes.length ; i++){
 		for(var j = 0 ; j < lines.length ; j++){
 			if((lines[j].p1.x == nodes[i].x && lines[j].p1.y == nodes[i].y)){
-					nodes[i].neighbors.push(search(lines[j].p2)) ; 
+					nodes[i].neighbors.push(searchNode(lines[j].p2)) ; 
 			}
 			else if((lines[j].p2.x == nodes[i].x && lines[j].p2.y == nodes[i].y)){
-				nodes[i].neighbors.push(search(lines[j].p1)) ; 
+				nodes[i].neighbors.push(searchNode(lines[j].p1)) ; 
 			}
 		}
 	}
@@ -115,27 +120,38 @@ function updateNeighbors(){
 
 function selectNode(){
 	if(startNode.x == 0 && startNode.y == 0){
-		nodeSelected ^= 1 ; 
+		nodeSelected = 1 ; 
 		document.getElementById("selectNode").classList.remove("btn-success");
 		document.getElementById("selectNode").classList.add("btn-danger");
-		document.getElementById("selectNode").innerHTML = "FinishNode" ; 
+		document.getElementById("selectNode").innerHTML = "RESET" ; 
 	}
 	else{
+		nodeSelected = 0 ; 
 		document.getElementById("selectNode").classList.remove("btn-danger");
 		document.getElementById("selectNode").classList.add("btn-success");
-		document.getElementById("selectNode").innerHTML = "StartNode" ;
+		document.getElementById("selectNode").innerHTML = "Start-Finish" ;
+		startNode.state = 'e' ; 
+		finishNode.state = 'e' ;
 		startNode = new Point(0 , 0 ) ; 
-		finishNode = new Point(0 , 0) ; 
+		finishNode = new Point(0 , 0) ;
+		for(var i = 0 ; i < lines.length ; i++){
+			lines[i].state = 'e' ; 
+		} 
+	
 	}
 }
 
-function callDijkstra(){
-	updateNeighbors() ; 
-	for(var i = 0 ; i < nodes.length ; i++){
-		console.log(nodes[i].neighbors);
+function callDijkstra(){							
+	for(var i =0  ; i < nodes.length ; i++){
+		nodes[i].neighbors = [] ; 
+		nodes[i].distance = Infinity ; 
 	}
+	updateNeighbors() ; 
+	console.log("startNode",startNode) ; 
+	console.log("finishNode",finishNode) ; 
+
 	var parent = lineDijkstra(startNode , finishNode , lines , nodes) ; 
-	console.log(parent); 
+	// console.log(parent); 
 }
 
 function setup() {
@@ -145,7 +161,6 @@ function setup() {
 	distance = calDistance(cities);
 	for (var i = 0; i < cities.length; ++i) order[i] = i;
 }
-
 
 function draw() {
 	// console.log(startNode);
@@ -176,9 +191,10 @@ function draw() {
 		}
 		
 		for(var i = 0 ; i < nodes.length ; i++) {
-			textSize(20);
+			textSize(15);
 			stroke(255);
 			strokeWeight(1);
+			fill(0);
 			text(i , nodes[i].x - 20 , nodes[i].y - 20);
 		}
 		
