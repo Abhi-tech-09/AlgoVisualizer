@@ -118,9 +118,6 @@ function up(){
 }
 
 
-
-
-
 function callDijkstra(){
     for (var r = 0 ; r < total_rows ; r++){
         for(var c = 0 ; c < total_cols ; c++){
@@ -141,20 +138,7 @@ function callBFS(){
         }
     }
 
-    arr = bfs(startNode , finishNode) ; 
-    a = arr[0] ; 
-    for (var i = 0 ; i < a.length ; i++){
-        if(a[i].state != 's' && a[i].state != 'f')
-            a[i].state = 'd' ; 
-    }
-
-    parent = arr[1] ; 
-    crawl = parent.get(finishNode) ; 
-    while(crawl != -1){
-        if(crawl != startNode && crawl != finishNode)
-            crawl.state = 'p' ;
-        crawl = parent.get(crawl) ; 
-    }
+    bfs(startNode , finishNode) ; 
 
 }
 

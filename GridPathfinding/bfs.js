@@ -10,10 +10,10 @@ function bfs(startNode , finishNode){
         frontNode = q[0] ; 
         q.shift() ; 
 
-        visitedNodes.push(frontNode);
-        updateVisited(visitedNodes); 
+        visitedNodes.push(frontNode); 
         if(frontNode == finishNode){
-            return [visitedNodes , parent] ; 
+            setPath(parent,visitedNodes,finishNode);
+            return  ; 
         }
 
         neighbor = frontNode.neighbors;
@@ -26,6 +26,39 @@ function bfs(startNode , finishNode){
             }
         } 
     }
-    return [visitedNodes , parent] ; 
+    return ; 
 
+}
+
+async function setPath(parent , visitedNodes , finishNode){
+    await updateVisited(visitedNodes);
+    crawl = parent.get(finishNode) ; 
+    while(crawl != -1){
+        await sleep(100) ; 
+        if(crawl != startNode && crawl != finishNode)
+            crawl.state = 'p' ;
+        crawl = parent.get(crawl) ; 
+    }
+    return "Path found" ; 
+}
+
+
+async function updateVisited(visitedNodes){
+    for (var i = 0 ; i < visitedNodes.length ; i++){
+        if(visitedNodes[i].state != 's' && visitedNodes[i].state != 'f' && visitedNodes[i].state != 'p' ){
+            await sleep(2) ; 
+            visitedNodes[i].state = 'd' ; 
+        }
+    }
+    return new Promise(function(resolve , reject){
+        setTimeout(() => {
+            const check = true ; 
+            if(check){
+                resolve();
+            }
+            else{
+                reject();
+            }
+        }, 1000);
+    });
 }
