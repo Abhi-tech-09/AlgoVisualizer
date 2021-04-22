@@ -135,7 +135,7 @@ function selectNode(){
 		startNode = new Point(0 , 0 ) ; 
 		finishNode = new Point(0 , 0) ;
 		for(var i = 0 ; i < lines.length ; i++){
-			lines[i].state = 'e' ; 
+			lines[i].state = 'e' ;
 		} 
 	
 	}
