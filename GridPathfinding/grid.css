@@ -1,6 +1,6 @@
 #canvas{
     position : relative ; 
-    left : 300px ;  
+    left : 195px ;  
 }
 body{
     background-color : black;
@@ -8,9 +8,16 @@ body{
 
 .btn-group{
     position: absolute;
+    /* top : 2px ; 
+    left : 5px;  */
 }
 
 #Visualize{
     position: absolute;
     top : 50px ; 
+}
+
+#makeGrid{
+    position: absolute;
+    top : 110px;
 }

@@ -57,16 +57,13 @@ function astar(startNode , finishNode , grid){
         }
 
     }
-
-
 }
-
+//Manhattan 
 function heuristic(node1 , node2){
      var X =  Math.abs(node1.x - node2.x) ;
      var Y =  Math.abs(node1.y - node2.y) ;
      ANS = X + Y ; 
      return ANS ; 
-
 }
 
 function findlow(openList , G){
