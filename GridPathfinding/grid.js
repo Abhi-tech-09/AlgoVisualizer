@@ -8,8 +8,8 @@ var finishNode ;
 
 var gap = 20 ; 
 
-var total_rows = 30 ; 
-var total_cols = 56 ;
+var total_rows = 30 ; //30
+var total_cols = 56   ; //56
 
 var grid = []  ; 
 for (var r = 0 ; r < total_rows ; r++){
@@ -176,14 +176,14 @@ async function meraRecursion(r0 , c0 , rm , cm){
     let horizontal = cm - c0 ; 
     let vertical = rm - r0 ; 
     if(vertical >= horizontal){
-        let randRow = Math.floor(Math.random() * (rm - r0 )) + r0+1 ;
+        let randRow = Math.floor(Math.random() * (rm - r0 )) + r0 + 1  ;
         if((randRow+1) <= rm && grid[randRow+1][5].state == 'w')
             randRow -= 1;
         else if((randRow-1) >= r0 && grid[randRow-1][5].state == 'w')
             randRow += 1 ;  
 
         for(var i = c0+1 ; i < cm ; i++){
-            await sleep(10);
+            await sleep(1);
             grid[randRow][i].state = 'w' ; 
         }
         var cnt = Math.floor(Math.random() * 3) + 2 ; 
@@ -200,13 +200,13 @@ async function meraRecursion(r0 , c0 , rm , cm){
         let randCol =  Math.floor(Math.random() * (cm - c0 )) + c0  ;
         if(randCol == c0)randCol += 1 ; 
 
-        if((randCol+1) <= cm && grid[5][randCol+1].state == 'w')
+        if((randCol+1) <= cm && (grid[2][randCol+1].state == 'w' || grid[3][randCol+1].state == 'w'))
             randCol -= 1;
-        else if((randCol-1) >= c0 && grid[5][randCol-1].state == 'w')
+        else if((randCol-1) >= c0 && (grid[2][randCol-1].state == 'w' || grid[3][randCol-1].state == 'w'))
             randCol += 1 ;  
 
         for(var i = r0+1 ; i < rm ; i++){
-            await sleep(10);
+            await sleep(1);
             grid[i][randCol].state = 'w' ; 
         }
 
@@ -224,39 +224,36 @@ async function meraRecursion(r0 , c0 , rm , cm){
     
 }
 
-async function makeGrid(){
+async function makeSimple(){
+    //Random Maze
+    let cnt = 0 ; 
+    while(cnt != 200){
+        cnt += 1;   
+    let rr = Math.floor(Math.random() * 30);
+    let cc = Math.floor(Math.random() * 56);
+    await sleep(10);
+    grid[rr][cc].state = 'w' ; 
+    }
+}
+
+async function RecursiveDivison(){
     for (var r = 0 ; r < total_rows ; r++){
         for(var c = 0 ; c < total_cols ; c++){
             grid[r][c].updateNeighbors(); 
         }
     }
     for(var r = 0 ; r < total_rows ; r++){
-        await sleep(10);
+        await sleep(1);
         grid[r][0].state = 'w' ; 
         grid[r][total_cols-1].state = 'w';
     }
     for(var c = 0 ; c < total_cols ; c++){
-        await sleep(10);
+        await sleep(1);
         grid[0][c].state = 'w' ; 
         grid[total_rows-1][c].state = 'w';
     }
 
     meraRecursion(0 , 0 , total_rows-1 , total_cols-1);
-
-    //Random Maze
-    /*let cnt = 0 ; 
-    while(cnt != 100){
-        cnt += 1;   
-    let rr = Math.floor(Math.random() * 30);
-    let cc = Math.floor(Math.random() * 50);
-    grid[rr][cc].state = 'w' ; 
-    }*/
-
-    //Recursive Division
-
-
-
-    
    
 }
 

@@ -30,8 +30,15 @@
 
       <button type="button" id = "Visualize" onclick = "reset()" class="btn btn-primary btn-lg">Reset</button>
 
-      <button type="button" id = "makeGrid" onclick = "makeGrid()" class="btn btn-danger btn-lg">Make Grid</button>
-
+      <div class="btn-group">
+        <button id = "makeGrid" type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Mazes
+        </button>
+        <ul class="dropdown-menu">
+          <li><button  onclick="makeSimple()" class="dropdown-item" href="#">Simple/Random</button></li>
+          <li><button  onclick = "RecursiveDivison()" class="dropdown-item" href="#">RecursiveDivison</button></li>
+        </ul>
+      </div>
     <canvas id = "canvas"  width = "1200" height = "800"></canvas>
 
 
