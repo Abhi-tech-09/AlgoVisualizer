@@ -1,4 +1,6 @@
-function dfs(startNode , finishNode){
+var DFS = {
+
+dfs:function(startNode , finishNode){
     s = [] ; 
     s.push(startNode) ; 
     var parent = new Map() ; 
@@ -11,7 +13,7 @@ function dfs(startNode , finishNode){
     
         visitedNodes.push(topNode);
         if(topNode == finishNode){
-            setPath(parent , visitedNodes , finishNode);
+            DFS.setPath(parent , visitedNodes ,startNode ,  finishNode);
             return ;
         }
 
@@ -26,25 +28,25 @@ function dfs(startNode , finishNode){
         }
     }
     return ; 
-}
+},
 
-async function setPath(parent , visitedNodes , finishNode){
-    await updateVisited(visitedNodes);
+setPath : async function (parent , visitedNodes , startNode , finishNode){
+    await DFS.updateVisited(visitedNodes);
     crawl = parent.get(finishNode) ; 
     while(crawl != -1){
         await sleep(10) ; 
-        if(crawl != startNode && crawl != finishNode)
+        if(crawl != startNode && crawl != finishNode && crawl != null)
             crawl.state = 'p' ;
         crawl = parent.get(crawl) ; 
     }
     return "Path found" ; 
-}
-
-async function updateVisited(visitedNodes){
+},
+updateVisited : async function (visitedNodes){
     for (var i = 0 ; i < visitedNodes.length ; i++){
         if(visitedNodes[i].state != 's' && visitedNodes[i].state != 'f' && visitedNodes[i].state != 'p' ){
             await sleep(10) ; 
             visitedNodes[i].state = 'd' ; 
         }
     }
+}
 }

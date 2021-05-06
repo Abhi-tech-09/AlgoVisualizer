@@ -1,4 +1,6 @@
-function bfs(startNode , finishNode){
+var BFS = {
+
+bfs : function(startNode , finishNode){
     q = [] ; 
     var parent = new Map() ;
     startNode.distance = 0 ;
@@ -28,9 +30,9 @@ function bfs(startNode , finishNode){
     }
     return ; 
 
-}
+} , 
 
-async function setPath(parent , visitedNodes , finishNode){
+setPath : async function(parent , visitedNodes , finishNode){
     await updateVisited(visitedNodes);
     crawl = parent.get(finishNode) ; 
     while(crawl != -1){
@@ -40,10 +42,10 @@ async function setPath(parent , visitedNodes , finishNode){
         crawl = parent.get(crawl) ; 
     }
     return "Path found" ; 
-}
+} , 
 
 
-async function updateVisited(visitedNodes){
+updateVisited : async function(visitedNodes){
     for (var i = 0 ; i < visitedNodes.length ; i++){
         if(visitedNodes[i].state != 's' && visitedNodes[i].state != 'f' && visitedNodes[i].state != 'p' ){
             await sleep(2) ; 
@@ -61,4 +63,6 @@ async function updateVisited(visitedNodes){
             }
         }, 1000);
     });
+}
+
 }

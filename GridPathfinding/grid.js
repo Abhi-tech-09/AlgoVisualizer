@@ -125,7 +125,7 @@ function callDijkstra(){
             grid[r][c].updateNeighbors(); 
         }
     }
-    parent = dijkstra(startNode , finishNode) ; 
+    parent = DijkstraAlgo.dijkstra(startNode , finishNode) ; 
     
 }
 
@@ -139,7 +139,7 @@ function callBFS(){
         }
     }
 
-    bfs(startNode , finishNode) ; 
+    BFS.bfs(startNode , finishNode) ; 
 
 }
 
@@ -152,7 +152,7 @@ function callDFS(){
             grid[r][c].updateNeighbors(); 
         }
     }
-     dfs(startNode , finishNode) ;
+     DFS.dfs(startNode , finishNode) ;
 }
 
 function callAstar(){
@@ -162,8 +162,18 @@ function callAstar(){
             grid[r][c].updateNeighbors(); 
         }
     }
-    astar(startNode , finishNode , grid) ; 
-    console.log(heuristic(startNode , finishNode));
+    ASTAR.astar(startNode , finishNode , grid) ; 
+}
+
+function callBiDijkstra(){
+    resetNodes() ; 
+    for (var r = 0 ; r < total_rows ; r++){
+        for(var c = 0 ; c < total_cols ; c++){
+            grid[r][c].updateNeighbors(); 
+        }
+    }
+
+    BIDIJKSTRA.BiDijkstra(startNode , finishNode , grid);
 }
  
 async function meraRecursion(r0 , c0 , rm , cm){
@@ -200,9 +210,9 @@ async function meraRecursion(r0 , c0 , rm , cm){
         let randCol =  Math.floor(Math.random() * (cm - c0 )) + c0  ;
         if(randCol == c0)randCol += 1 ; 
 
-        if((randCol+1) <= cm && (grid[2][randCol+1].state == 'w' || grid[3][randCol+1].state == 'w'))
+        if((randCol+1) <= cm && (grid[2][randCol+1].state == 'w'))
             randCol -= 1;
-        else if((randCol-1) >= c0 && (grid[2][randCol-1].state == 'w' || grid[3][randCol-1].state == 'w'))
+        else if((randCol-1) >= c0 && (grid[2][randCol-1].state == 'w'))
             randCol += 1 ;  
 
         for(var i = r0+1 ; i < rm ; i++){

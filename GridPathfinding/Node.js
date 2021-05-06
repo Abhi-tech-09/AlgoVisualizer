@@ -22,7 +22,8 @@ Node.prototype.draw_node = function(ctx,gap){
         ctx.fillStyle = '#0000FF' ;
     }
     else if (this.state == 'e'){
-        ctx.fillStyle = '#AAAAAA' ; 
+        // ctx.fillStyle = '#AAAAAA' ; 
+        ctx.fillStyle = '#A78D84' ; 
     }
     else if(this.state == 'd'){
         ctx.fillStyle = '#FFD700' ; 
@@ -32,6 +33,7 @@ Node.prototype.draw_node = function(ctx,gap){
     }
     ctx.beginPath() ; 
     ctx.rect(this.x ,this.y , gap , gap );
+    // ctx.arc(this.x + 10 ,  this.y + 10 , 10 , 0 , 2*Math.PI);
     ctx.closePath() ; 
     ctx.fill() ; 
 }
@@ -56,8 +58,13 @@ Node.prototype.updateNeighbors = function(){
         this.neighbors.push(grid[this.row][this.col+1]) ;
     }
 }
+
 const sleep = (time) => {
     return new Promise(
         (resolve) => setTimeout(resolve , time)
         ); 
+}
+
+function cmp(nodeA  ,nodeB){
+    return nodeA.distance - nodeB.distance ; 
 }

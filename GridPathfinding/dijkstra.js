@@ -1,4 +1,7 @@
-function dijkstra(start , finish){
+var DijkstraAlgo = {
+
+
+dijkstra : async function(start , finish){
     visitedNodes = [] ; 
      q = [] ; 
     start.distance = 0 ; 
@@ -14,8 +17,8 @@ function dijkstra(start , finish){
 
         visitedNodes.push(closestNode) ; 
         if(closestNode == finish){
-           var r = setPath(parent , visitedNodes , finishNode);
-           console.log(r);
+           var r = DijkstraAlgo.setPath(parent , visitedNodes ,startNode , finishNode);
+        //    console.log(r);
            return parent ; 
         }
 
@@ -30,28 +33,24 @@ function dijkstra(start , finish){
     }
     return parent ;
     
-}
+} ,
 
-async function setPath(parent , visitedNodes , finishNode){
-    await updateVisited(visitedNodes);
+setPath : async function (parent , visitedNodes ,startNode ,  finishNode){
+   await DijkstraAlgo.updateVisited(visitedNodes);
     crawl = parent.get(finishNode) ; 
     while(crawl != -1){
         await sleep(100) ; 
-        if(crawl != startNode && crawl != finishNode)
+        if(crawl != startNode && crawl != finishNode && crawl != null)
             crawl.state = 'p' ;
         crawl = parent.get(crawl) ; 
     }
     return "Path found" ; 
-}
+},
 
-function cmp(nodeA  ,nodeB){
-    return nodeA.distance - nodeB.distance ; 
-}
-
-async function updateVisited(visitedNodes){
+updateVisited : async function(visitedNodes){
     for (var i = 0 ; i < visitedNodes.length ; i++){
         if(visitedNodes[i].state != 's' && visitedNodes[i].state != 'f' && visitedNodes[i].state != 'p' ){
-            await sleep(2) ; 
+            await sleep(1) ; 
             visitedNodes[i].state = 'd' ; 
         }
     }
@@ -67,3 +66,6 @@ async function updateVisited(visitedNodes){
         }, 1000);
     });
 }
+
+
+};
