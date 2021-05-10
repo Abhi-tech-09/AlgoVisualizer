@@ -22,8 +22,8 @@ Node.prototype.draw_node = function(ctx,gap){
         ctx.fillStyle = '#0000FF' ;
     }
     else if (this.state == 'e'){
-        // ctx.fillStyle = '#AAAAAA' ; 
-        ctx.fillStyle = '#A78D84' ; 
+        ctx.fillStyle = '#AAAAAA' ; 
+        // ctx.fillStyle = '#A78D84' ; 
     }
     else if(this.state == 'd'){
         ctx.fillStyle = '#FFD700' ; 

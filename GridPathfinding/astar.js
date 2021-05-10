@@ -33,7 +33,8 @@ astar:function(startNode , finishNode , grid){
         closedList.push(currentSquare) ; 
         visitedNodes.push(currentSquare);
         if(currentSquare == finishNode){
-            ASTAR.asetPath(parent , visitedNodes ,startNode , finishNode);
+            console.log(parent)
+            ASTAR.setPath(parent , visitedNodes ,startNode , finishNode);
             return ;  
         }
 
@@ -90,17 +91,19 @@ findNode : function(node , array){
     return false ; 
 } , 
 
-asetPath: async function(parent , visitedNodes ,startNode ,  finishNode){
+setPath: async function(parent , visitedNodes ,startNode ,  finishNode){
     await ASTAR.updateVisited(visitedNodes);
-    crawl = parent.get(finishNode) ; 
-    while(crawl != -1){
+    crawl = parent.get(finishNode) ;
+    while(crawl != -1){  
         await sleep(100) ; 
         if(crawl != startNode && crawl != finishNode && crawl != null)
-            crawl.state = 'p' ;
+            crawl.state = 'p'  , console.log(crawl);
         crawl = parent.get(crawl) ; 
+        
     }
     return "Path found" ; 
 } , 
+
 
 updateVisited:async function (visitedNodes){
     for (var i = 0 ; i < visitedNodes.length ; i++){

@@ -18,7 +18,6 @@ dijkstra : async function(start , finish){
         visitedNodes.push(closestNode) ; 
         if(closestNode == finish){
            var r = DijkstraAlgo.setPath(parent , visitedNodes ,startNode , finishNode);
-        //    console.log(r);
            return parent ; 
         }
 

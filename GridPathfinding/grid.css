@@ -5,17 +5,25 @@
 body{
     background-color : black;
 }
-
-.btn-group{
-    position: absolute;
-    /* top : 2px ; 
-    left : 5px;  */
+#RESET{
+    position : absolute;
+    top: 80px;
+    left: 30px;
 }
 
-#Visualize{
+#Algo{
     position: absolute;
-    top : 50px ; 
+    top : 20px; 
+    left : 20px;
 }
+.Maze{
+    position: absolute;
+   
+    top: 50px;
+    left: 30px;
+}
+
+
 
 #makeGrid{
     position: absolute;

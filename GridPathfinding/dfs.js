@@ -9,11 +9,12 @@ dfs:function(startNode , finishNode){
 
     while(s.length != 0){
         var topNode = s[s.length - 1] ; 
-        s.pop() ;
+        console.log(s.pop()) ;
     
         visitedNodes.push(topNode);
         if(topNode == finishNode){
-            DFS.setPath(parent , visitedNodes ,startNode ,  finishNode);
+            DFS.dfssetPath(parent , visitedNodes ,startNode ,  finishNode);
+            console.log("It has ended")
             return ;
         }
 
@@ -27,17 +28,22 @@ dfs:function(startNode , finishNode){
             }
         }
     }
+    
     return ; 
 },
 
-setPath : async function (parent , visitedNodes , startNode , finishNode){
+dfssetPath : async function (parent , visitedNodes , startNode , finishNode){
     await DFS.updateVisited(visitedNodes);
+
     crawl = parent.get(finishNode) ; 
     while(crawl != -1){
         await sleep(10) ; 
         if(crawl != startNode && crawl != finishNode && crawl != null)
             crawl.state = 'p' ;
         crawl = parent.get(crawl) ; 
+        if(crawl == startNode)
+            break;
+        console.log(crawl)  
     }
     return "Path found" ; 
 },

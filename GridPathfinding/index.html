@@ -16,8 +16,8 @@
 </head>
 <body style="margin:0px; padding:0px; overflow:hidden;">
 
-    <div class="btn-group">
-        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    <div id="btn-group">
+        <button type="button" id = "Algo" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           Algorithms
         </button>
         <ul class="dropdown-menu">
@@ -29,9 +29,9 @@
         </ul>
       </div>
 
-      <button type="button" id = "Visualize" onclick = "reset()" class="btn btn-primary btn-lg">Reset</button>
+      <button type="button" id = "RESET" onclick = "reset()" class="btn btn-primary btn-lg">Reset</button>
 
-      <div class="btn-group">
+      <div class="Maze">
         <button id = "makeGrid" type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           Mazes
         </button>
@@ -47,8 +47,8 @@
     <script src = "dijkstra.js"></script>
     <script src="bfs.js"></script>
     <script src="astar.js"></script>
-    <script src = "dfs.js"></script>
     <script src="biDijkstra.js"></script>
+    <script src = "dfs.js"></script>
     <script src="grid.js"></script> 
     <script 
         src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
