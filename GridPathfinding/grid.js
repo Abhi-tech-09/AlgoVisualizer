@@ -8,7 +8,7 @@ var finishNode ;
 
 var gap = 20 ; 
 
-var total_rows = 30 ; //30
+var total_rows = 32 ; //30
 var total_cols = 56   ; //56
 
 var grid = []  ; 
@@ -16,7 +16,7 @@ for (var r = 0 ; r < total_rows ; r++){
     grid.push([])
     for(var c = 0 ; c < total_cols ; c++){
         //e stands for empty
-        node = new Node(r , c , c * (gap + 1) , r * (gap + 2) , 'e' , total_rows , total_cols) ; 
+        node = new Node(r , c , c * (gap + 1) , r * (gap + 1) , 'e' , total_rows , total_cols) ; 
         grid[r][c] = node ;  
     }
 }
@@ -155,14 +155,24 @@ function callDFS(){
      DFS.dfs(startNode , finishNode) ;
 }
 
-function callAstar(){
+function callAstarM(){
     resetNodes() ; 
     for (var r = 0 ; r < total_rows ; r++){
         for(var c = 0 ; c < total_cols ; c++){
             grid[r][c].updateNeighbors(); 
         }
     }
-    ASTAR.astar(startNode , finishNode , grid) ; 
+    ASTAR.astarM(startNode , finishNode , grid) ; 
+}
+
+function callAstarE(){
+    resetNodes() ; 
+    for (var r = 0 ; r < total_rows ; r++){
+        for(var c = 0 ; c < total_cols ; c++){
+            grid[r][c].updateNeighbors(); 
+        }
+    }
+    ASTAR.astarE(startNode , finishNode , grid) ; 
 }
 
 function callBiDijkstra(){
@@ -175,6 +185,16 @@ function callBiDijkstra(){
 
     BIDIJKSTRA.BiDijkstra(startNode , finishNode , grid);
 }
+
+function callc(){
+    resetNodes() ; 
+    for (var r = 0 ; r < total_rows ; r++){
+        for(var c = 0 ; c < total_cols ; c++){
+            grid[r][c].updateNeighbors(); 
+        }
+    }
+    CD.cd(startNode,finishNode,grid);
+}
  
 async function meraRecursion(r0 , c0 , rm , cm){
     if(Math.abs(rm-r0) < 5){
@@ -186,11 +206,7 @@ async function meraRecursion(r0 , c0 , rm , cm){
     let horizontal = cm - c0 ; 
     let vertical = rm - r0 ; 
     if(vertical >= horizontal){
-        let randRow = Math.floor(Math.random() * (rm - r0 )) + r0 + 1  ;
-        if((randRow+1) <= rm && grid[randRow+1][5].state == 'w')
-            randRow -= 1;
-        else if((randRow-1) >= r0 && grid[randRow-1][5].state == 'w')
-            randRow += 1 ;  
+        let randRow = Math.floor(Math.random() * ((rm-2) - (r0+2) )) + r0+2   ; 
 
         for(var i = c0+1 ; i < cm ; i++){
             await sleep(1);
@@ -207,13 +223,8 @@ async function meraRecursion(r0 , c0 , rm , cm){
         meraRecursion(randRow , c0 , rm , cm ) ;
     }
     else{
-        let randCol =  Math.floor(Math.random() * (cm - c0 )) + c0  ;
-        if(randCol == c0)randCol += 1 ; 
-
-        if((randCol+1) <= cm && (grid[2][randCol+1].state == 'w'))
-            randCol -= 1;
-        else if((randCol-1) >= c0 && (grid[2][randCol-1].state == 'w'))
-            randCol += 1 ;  
+        let randCol =  Math.floor(Math.random() * ((cm-2) - (c0+2) )) + c0+2  ;
+        
 
         for(var i = r0+1 ; i < rm ; i++){
             await sleep(1);
@@ -232,6 +243,27 @@ async function meraRecursion(r0 , c0 , rm , cm){
 
     }
     
+}
+
+async function newrecursion(l , r){
+    if(Math.abs(l-r) <= 3){
+        return ; 
+    }
+ 
+        var mid = parseInt((l + r) / 2) ;
+        for(var row = 0 ; row < total_rows ; row++){
+            await sleep(1);
+            grid[row][mid].state = 'w';
+        } 
+        let cnt = 0 ; 
+        while(cnt++ <= 3){
+            randRow = Math.floor(Math.random() * (total_rows)) ;
+            grid[randRow][mid].state = 'e';  
+        }
+        newrecursion(l , mid-1); 
+        newrecursion(mid+1 , r);
+    
+   
 }
 
 async function makeSimple(){
@@ -265,6 +297,63 @@ async function RecursiveDivison(){
 
     meraRecursion(0 , 0 , total_rows-1 , total_cols-1);
    
+}
+
+async function recursion(l , r){    
+    if(Math.abs(l-r) <= 2)
+        return ; 
+    
+    var mid = parseInt((l + r) / 2) ;
+    for(var col = 0 ; col < total_cols ; col++){
+        await sleep(1);
+        grid[mid][col].state = 'w';
+    } 
+    let cnt = 0 ; 
+    while(cnt++ <= 3){
+        randCol = Math.floor(Math.random() * (total_cols-1)) ;
+        grid[mid][randCol].state = 'e';  
+    }
+    recursion(l , mid-1) ; 
+    recursion(mid+1 , r) ; 
+}
+
+async function RecursiveDivisonV(){
+    for (var r = 0 ; r < total_rows ; r++){
+        for(var c = 0 ; c < total_cols ; c++){
+            grid[r][c].updateNeighbors(); 
+        }
+    }
+    for(var r = 0 ; r < total_rows ; r++){
+        await sleep(1);
+        grid[r][0].state = 'w' ; 
+        grid[r][total_cols-1].state = 'w';
+    }
+    for(var c = 0 ; c < total_cols ; c++){
+        await sleep(1);
+        grid[0][c].state = 'w' ; 
+        grid[total_rows-1][c].state = 'w';
+    }
+    recursion(0 , total_rows-1);
+
+}
+
+async function RecursiveDivisonH(){
+    for (var r = 0 ; r < total_rows ; r++){
+        for(var c = 0 ; c < total_cols ; c++){
+            grid[r][c].updateNeighbors(); 
+        }
+    }
+    for(var r = 0 ; r < total_rows ; r++){
+        await sleep(1);
+        grid[r][0].state = 'w' ; 
+        grid[r][total_cols-1].state = 'w';
+    }
+    for(var c = 0 ; c < total_cols ; c++){
+        await sleep(1);
+        grid[0][c].state = 'w' ; 
+        grid[total_rows-1][c].state = 'w';
+    }
+    newrecursion(0 , total_cols-1);
 }
 
 function resetNodes(){

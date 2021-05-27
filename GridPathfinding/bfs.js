@@ -14,7 +14,7 @@ bfs : function(startNode , finishNode){
 
         visitedNodes.push(frontNode); 
         if(frontNode == finishNode){
-            setPath(parent,visitedNodes,finishNode);
+            BFS.setPath(parent,visitedNodes,finishNode);
             return  ; 
         }
 
@@ -33,7 +33,7 @@ bfs : function(startNode , finishNode){
 } , 
 
 setPath : async function(parent , visitedNodes , finishNode){
-    await updateVisited(visitedNodes);
+    await BFS.updateVisited(visitedNodes);
     crawl = parent.get(finishNode) ; 
     while(crawl != -1){
         await sleep(100) ; 

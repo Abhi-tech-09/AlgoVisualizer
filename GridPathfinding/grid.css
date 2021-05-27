@@ -1,31 +1,39 @@
 #canvas{
     position : relative ; 
-    left : 195px ;  
+    left : 195px ; 
+    top : 0px ;  
+    height : 100%;
 }
 body{
     background-color : black;
 }
 #RESET{
     position : absolute;
-    top: 80px;
+    top: 220px;
     left: 30px;
 }
 
 #Algo{
     position: absolute;
-    top : 20px; 
-    left : 20px;
+    top : 160px; 
+    left : 32px;
+    width : 120px ;     
 }
 .Maze{
     position: absolute;
-   
     top: 50px;
     left: 30px;
+}
+
+.info{
+    position : absolute ; 
+    top : 420px ; 
+    left : -1px ;  
 }
 
 
 
 #makeGrid{
     position: absolute;
-    top : 110px;
+    top : 260px;
 }
