@@ -4,6 +4,19 @@
     font-family: Verdana;
 }
 
+.container{
+  display: grid;
+  grid-template-columns: 1fr ;
+  position : relative  ; 
+  top : 80px ; 
+
+}
+.button_container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap : 2px ; 
+}
+
 header {
     background-color: black;
     height: 91.6px;
@@ -49,22 +62,26 @@ ul li.active a {
     left: -50px;
     position: absolute;
 }
-
-.main {
-    max-width: 1000px;
-    margin: auto;
-}
-
-.title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.title{
+  align-items: center;
+  justify-content: center;   
 }
 
 .title h1 {
     color: #fff;
     font-size: 70px;
+}
+.grid{
+  justify-self: end;
+  /* border : 2px solid black;  */
+  padding : 10px ; 
+  margin : 30px ; 
+}
+.canvas{
+  justify-self: start;
+ /* border : 2px solid black ;  */
+ padding : 10px ; 
+ margin : 30px ; 
 }
 
 .button {
@@ -120,6 +137,8 @@ footer {
     color: #eee;
     padding-bottom: 10px;
     padding-top: 10px;
+    position: relative;
+    top : 280px ; 
 }
  html {
   height: 100%;
@@ -333,9 +352,7 @@ body {
   text-decoration: none;
   -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
           box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-          position:absolute;
-          top: 450px;
-    left: 560px;
+          
 }
 
 .animated-button1::before {
@@ -447,3 +464,4 @@ body {
             transform: translateY(100%);
   }
 }
+
