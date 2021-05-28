@@ -18,6 +18,7 @@ dijkstra : async function(start , finish){
         visitedNodes.push(closestNode) ; 
         if(closestNode == finish){
            var r = DijkstraAlgo.setPath(parent , visitedNodes ,startNode , finishNode);
+           
            return parent ; 
         }
 
@@ -43,6 +44,7 @@ setPath : async function (parent , visitedNodes ,startNode ,  finishNode){
             crawl.state = 'p' ;
         crawl = parent.get(crawl) ; 
     }
+    enable()
     return "Path found" ; 
 },
 

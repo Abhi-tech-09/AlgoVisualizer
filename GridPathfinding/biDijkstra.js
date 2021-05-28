@@ -115,6 +115,7 @@ mysetPath : async function (parent ,  finishNode){
             crawl.state = 'p' ;
         crawl = parent.get(crawl) ; 
     }
+    enable() ; 
     return "Path found" ; 
 } ,
 

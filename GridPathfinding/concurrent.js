@@ -141,6 +141,7 @@ var CD = {
                 crawl.state = 'p' ;
             crawl = parent.get(crawl) ; 
         }
+        enable() ; 
         return "Path found" ; 
     } 
 

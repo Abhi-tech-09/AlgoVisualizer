@@ -41,6 +41,7 @@ setPath : async function(parent , visitedNodes , finishNode){
             crawl.state = 'p' ;
         crawl = parent.get(crawl) ; 
     }
+    enable();
     return "Path found" ; 
 } , 
 

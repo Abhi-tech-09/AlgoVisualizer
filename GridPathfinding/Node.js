@@ -68,3 +68,12 @@ const sleep = (time) => {
 function cmp(nodeA  ,nodeB){
     return nodeA.distance - nodeB.distance ; 
 }
+
+function disable(){
+    document.getElementById("Algo-btn").disabled = true;
+    document.getElementById("makeGrid").disabled = true ; 
+}
+function enable(){
+    document.getElementById("Algo-btn").disabled = false;
+    document.getElementById("makeGrid").disabled = false ;
+}

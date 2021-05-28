@@ -45,6 +45,7 @@ dfssetPath : async function (parent , visitedNodes , startNode , finishNode){
             break;
         console.log(crawl)  
     }
+    enable() ; 
     return "Path found" ; 
 },
 updateVisited : async function (visitedNodes){

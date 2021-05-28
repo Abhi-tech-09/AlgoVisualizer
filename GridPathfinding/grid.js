@@ -125,8 +125,9 @@ function callDijkstra(){
             grid[r][c].updateNeighbors(); 
         }
     }
-    parent = DijkstraAlgo.dijkstra(startNode , finishNode) ; 
-    
+    if (startNode != null && finishNode != null){
+     disable() ; 
+     DijkstraAlgo.dijkstra(startNode , finishNode) ;}  
 }
 
 function callBFS(){
@@ -138,8 +139,11 @@ function callBFS(){
             grid[r][c].updateNeighbors(); 
         }
     }
+    if(startNode != null && finishNode != null){
+        disable()
+        BFS.bfs(startNode , finishNode) ; 
+    }
 
-    BFS.bfs(startNode , finishNode) ; 
 
 }
 
@@ -152,7 +156,10 @@ function callDFS(){
             grid[r][c].updateNeighbors(); 
         }
     }
+    if(startNode != null && finishNode != null){
+        disable();
      DFS.dfs(startNode , finishNode) ;
+    }
 }
 
 function callAstarM(){
@@ -162,7 +169,10 @@ function callAstarM(){
             grid[r][c].updateNeighbors(); 
         }
     }
-    ASTAR.astarM(startNode , finishNode , grid) ; 
+    if(startNode != null && finishNode != null){
+    disable();
+    ASTAR.astarM(startNode , finishNode , grid) ;
+    } 
 }
 
 function callAstarE(){
@@ -172,7 +182,9 @@ function callAstarE(){
             grid[r][c].updateNeighbors(); 
         }
     }
-    ASTAR.astarE(startNode , finishNode , grid) ; 
+    if(startNode != null && finishNode != null){
+    disable(); 
+    ASTAR.astarE(startNode , finishNode , grid) ;} 
 }
 
 function callBiDijkstra(){
@@ -182,8 +194,9 @@ function callBiDijkstra(){
             grid[r][c].updateNeighbors(); 
         }
     }
-
-    BIDIJKSTRA.BiDijkstra(startNode , finishNode , grid);
+    if(startNode != null && finishNode != null){
+    disable();
+    BIDIJKSTRA.BiDijkstra(startNode , finishNode , grid);}
 }
 
 function callc(){
@@ -193,7 +206,9 @@ function callc(){
             grid[r][c].updateNeighbors(); 
         }
     }
-    CD.cd(startNode,finishNode,grid);
+    if(startNode != null && finishNode != null){
+    disable() ; 
+    CD.cd(startNode,finishNode,grid);}
 }
  
 async function meraRecursion(r0 , c0 , rm , cm){
@@ -357,6 +372,9 @@ async function RecursiveDivisonH(){
 }
 
 function resetNodes(){
+    if(startNode == null || finishNode == null){
+     alert("Select Start and finsh Node.") ; 
+    }
     for(var i = 0 ; i < total_rows ; i++){
         for(var j = 0 ; j < total_cols ; j++){
             if(grid[i][j].state == 'd' || grid[i][j].state == 'p'){

@@ -170,6 +170,7 @@ setPath: async function(parent , visitedNodes ,startNode ,  finishNode){
         crawl = parent.get(crawl) ; 
         
     }
+    enable() ; 
     return "Path found" ; 
 } , 
 
